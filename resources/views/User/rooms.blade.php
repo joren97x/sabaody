@@ -37,7 +37,11 @@
 
 
 <div class="container-fluid mt-5 p-5">
-  <h3 class="title p-5">Single Rooms</h3>
+  <h3 class="title p-5">
+    {{request()->is('rooms/single-room') ? 'Single Rooms': ''}}
+    {{request()->is('rooms/double-room') ? 'Double Rooms': ''}}
+    {{request()->is('rooms/family-room') ? 'Family Rooms': ''}}
+  </h3>
     <div class="row justify-content-center">
       @foreach($rooms as $room)
         <div class="col-4 col-md-12 col-sm-12 col-lg-4 mt-3">
@@ -88,15 +92,15 @@
 <nav>
   <ul class="pagination justify-content-center">
     <li class="page-item">
-      <a class="page-link text-dark" href="/rooms" aria-label="Previous">
+      <a class="page-link text-dark" href="/rooms/single-room" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link text-primary" href="/rooms/single-room">Single Room</a></li>
-    <li class="page-item"><a class="page-link text-dark" href="/rooms/double-room">Double Room</a></li>
-    <li class="page-item"><a class="page-link text-dark" href="/rooms/family-room">Family Room</a></li>
+    <li class="page-item"><a class="page-link {{request()->is('rooms/single-room') ? 'text-primary': 'text-dark'}} " href="/rooms/single-room">Single Room</a></li>
+    <li class="page-item"><a class="page-link {{request()->is('rooms/double-room') ? 'text-primary': 'text-dark'}}" href="/rooms/double-room">Double Room</a></li>
+    <li class="page-item"><a class="page-link {{request()->is('rooms/family-room') ? 'text-primary': 'text-dark'}}" href="/rooms/family-room">Family Room</a></li>
     <li class="page-item">
-      <a class="page-link text-dark" href="room2.php" aria-label="Next">
+      <a class="page-link text-dark" href="/rooms/family-room" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

@@ -28,13 +28,16 @@
           <a class="nav-link" href="/rooms/single-room">Room</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" >Services</a>
+          <a class="nav-link" href="#services">Services</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/report">Report</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/team">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
         </li>
       </ul>
     </div>
@@ -203,7 +206,7 @@
               <h5 class="card-title float-start"><span class="badge bg-primary text-dark">&#8369; 2,500.00</span></h5>
             </div>
             <div class="overlay-body">
-              <h4 class="text-center"><a href="room.php">Single Room <i class="fa-solid fa-arrow-right"></i></a></h4>
+              <h4 class="text-center"><a href="/rooms/single-room">Single Room <i class="fa-solid fa-arrow-right"></i></a></h4>
             </div>
           </div>
         </div>
@@ -216,7 +219,7 @@
               <h5 class="card-title float-start"><span class="badge bg-primary text-dark">&#8369; 5,000.00</span></h5>
             </div>
             <div class="overlay-body">
-              <h4 class="text-center"><a href="room.php">Double Room <i class="fa-solid fa-arrow-right"></i></a></h4>
+              <h4 class="text-center"><a href="/rooms/double-room">Double Room <i class="fa-solid fa-arrow-right"></i></a></h4>
             </div>
           </div>
         </div>
@@ -229,7 +232,7 @@
               <h5 class="card-title float-start"><span class="badge bg-primary text-dark">&#8369; 10,000.00</span></h5>
             </div>
             <div class="overlay-body">
-              <h4 class="text-center"><a href="room.php">Family Room <i class="fa-solid fa-arrow-right"></i></a></h4>
+              <h4 class="text-center"><a href="/rooms/family-room">Family Room <i class="fa-solid fa-arrow-right"></i></a></h4>
             </div>
           </div>
         </div>

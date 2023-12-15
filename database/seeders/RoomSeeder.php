@@ -16,6 +16,7 @@ class RoomSeeder extends Seeder
         //
         $imagePath = public_path('images/rooms');
         $images = glob($imagePath . '/*.{jpg,png,gif}', GLOB_BRACE);
+        
         for($i = 0; $i < 8; $i++) {
             DB::table('rooms')->insert([
                 'name' => fake()->sentence(2),

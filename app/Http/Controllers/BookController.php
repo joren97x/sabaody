@@ -16,6 +16,5 @@ class BookController extends Controller
             'check-in' => 'required',
             'check-out' => 'required'
         ]);
-        dd($data);
     }
 }

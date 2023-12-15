@@ -38,37 +38,47 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h1 class="text-center mb-5 p-5">Report Form</h1>
-                <form>
+                <form action="/report" method="POST">
+                  @csrf
                     <div class="mb-3">
                         <label for="reporterName" class="form-label">Enter CODE:</label>
-                        <input type="text" class="form-control" id="reporterName" placeholder="Enter code">
+                        <input type="text" name="room_number" class="form-control" id="reporterName" placeholder="Enter code">
+                        @error('room_number')
+                            <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="severityRadio" id="lowSeverity" value="low">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="lowSeverity" value="low">
                             <label class="form-check-label" for="lowSeverity">BED</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
                             <label class="form-check-label" for="highSeverity">CABINET</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="severityRadio" id="mediumSeverity" value="medium">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="mediumSeverity" value="medium">
                             <label class="form-check-label" for="mediumSeverity">TV</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
                             <label class="form-check-label" for="highSeverity">CR</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
                             <label class="form-check-label" for="highSeverity">REF</label>
                         </div>
+                        @error('item')
+                            <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <textarea class="form-control" id="reportDescription" placeholder="Describe the issue" required></textarea>
+                        <textarea  name="description" class="form-control" id="reportDescription" placeholder="Describe the issue" ></textarea>
+                        @error('description')
+                            <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
 
                     <button type="submit" class="btn btn-secondary float-end">Submit Report</button>
