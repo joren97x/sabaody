@@ -16,7 +16,12 @@ class ViewController extends Controller
     public function rooms($category) {
         $rooms = Room::where('category', $category)->get();
         return view('user.rooms', ['rooms' => $rooms]);
-        
+    }
+
+    public function logout() {
+        auth()->logout();
+        session()->regenerateToken();
+        return redirect('/login');
     }
 
     public function team() {
@@ -51,11 +56,11 @@ class ViewController extends Controller
         ]);
 
         if(Auth::attempt($data)) {
-            dd("hello");
-            return view('admin.dashboard');
+            
+            return redirect('/admin/dashboard');
         }
         else {
-            dd("the fuck bruh");
+            
             return back();
         }
 

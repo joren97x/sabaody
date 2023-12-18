@@ -40,7 +40,7 @@
                   </div>
                 </div>
                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <input type="text" value="admin" name="role">
+                    <input type="hidden" value="admin" name="role">
                   <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
                 </div>
                 <div>
