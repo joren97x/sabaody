@@ -16,13 +16,13 @@
   <h3 class="text-center">
     <a href="/admin/dashboard">Dashboard</a>
   </h3>
-  <h6 class="text-center small"><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
+  <h6 class="text-center small"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
   <hr>
   <ul class="list-unstyled ps-0">
     <li class="mb-1">
       <button class="btn btn-toggle align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#room-collapse" aria-expanded="false"><i class="fa-solid fa-house-chimney"></i>
            Room
-          </button>
+          </button> 
           <div class="collapse show" id="room-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li><a href="/admin/add-rooms"><i class="fa-solid fa-house-chimney-medical"></i> add room</a></li>
@@ -37,7 +37,7 @@
           <div class="collapse" id="staff-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li><a href="/admin/add-employees"><i class="fa-solid fa-user-plus"></i> add employee</a></li>
-                  <li><a href="/admin/view-employees"><i class="fa-solid fa-users-viewfinder"></i> view employee</a></li>
+                  <li><a href="/admin/view-employee"><i class="fa-solid fa-users-viewfinder"></i> view employee</a></li>
               </ul>
           </div>
       </li>
@@ -62,7 +62,7 @@
     <!-- card -->
     <div class="card">
       <div class="card-body">
-        <form method="post" action="/admin/store-room">
+        <form method="post" action="/admin/store-room" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <input type="text" placeholder="Room name" class="form-control custom-file-input" id="photoInput" name="name" aria-describedby="photoHelp">

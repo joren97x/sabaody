@@ -26,7 +26,8 @@ class RoomSeeder extends Seeder
                 'bed_type' => fake()->randomElement(['King size', 'Full size', 'Queen size']),
                 'category' => fake()->randomElement(['single-room', 'double-room', 'family-room']),
                 'price' => fake()->numberBetween(1000, 10000),
-                'room_number' => fake()->numberBetween(100, 999)
+                'room_number' => fake()->numberBetween(100, 999),
+                'status' => true
             ]);
         }
     }

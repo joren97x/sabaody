@@ -50,23 +50,23 @@
 
                     <div class="mb-3">
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="lowSeverity" value="low">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="lowSeverity" value="Bed">
                             <label class="form-check-label" for="lowSeverity">BED</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="Cabinet">
                             <label class="form-check-label" for="highSeverity">CABINET</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="mediumSeverity" value="medium">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="mediumSeverity" value="TV">
                             <label class="form-check-label" for="mediumSeverity">TV</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="Cr">
                             <label class="form-check-label" for="highSeverity">CR</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="high">
+                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="Ref">
                             <label class="form-check-label" for="highSeverity">REF</label>
                         </div>
                         @error('item')

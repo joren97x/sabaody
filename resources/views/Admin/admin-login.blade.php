@@ -38,6 +38,11 @@
                         <p class="text-danger">{{$message}}</p> 
                     @enderror
                   </div>
+                  @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{session('eror')}}
+                      </div>
+                    @endif
                 </div>
                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <input type="hidden" value="admin" name="role">

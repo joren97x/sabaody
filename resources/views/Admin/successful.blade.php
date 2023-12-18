@@ -16,7 +16,7 @@
             <h3 class="text-center">
               <a href="/admin/dashboard">Dashboard</a>
             </h3>
-            <h6 class="text-center small"><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
+            <h6 class="text-center small"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
             <hr>
             <ul class="list-unstyled ps-0">
                 <li class="mb-1">
@@ -37,7 +37,7 @@
                     <div class="collapse" id="staff-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li><a href="/admin/add-employees"><i class="fa-solid fa-user-plus"></i> add employee</a></li>
-                            <li><a href="/admin/view-employees"><i class="fa-solid fa-users-viewfinder"></i> view employee</a></li>
+                            <li><a href="/admin/view-employee"><i class="fa-solid fa-users-viewfinder"></i> view employee</a></li>
                         </ul>
                     </div>
                 </li>
@@ -70,15 +70,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th><i class="fa-solid fa-trash-can text-danger h4"></i></th>
-            </tr>
+            @foreach ($reservations as $reservation)
+                <tr>
+                    <td> {{ $reservation->id }} </td>
+                    <td> {{ $reservation->room_number }} </td>
+                    <td> {{ $reservation->name }} </td>
+                    <td> {{ $reservation->email }} </td>
+                    <td> {{ $reservation->check_in }} </td>
+                    <td> {{ $reservation->check_out }} </td>
+                    <td><i class="fa-solid fa-trash-can text-danger h4"></i></td>
+                </tr>
+            @endforeach
+            @if (count($reservations) == 0)
+                <tr>
+                    <td colspan="7">No data found.</td>
+                </tr>
+            @endif
         </tbody>
     </table>
 </div>

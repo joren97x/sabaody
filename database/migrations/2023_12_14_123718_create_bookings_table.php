@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('status');
             $table->string('email');
-            $table->date('check-in');
-            $table->date('check-out');
+            $table->date('check_in');
+            $table->date('check_out');
             $table->timestamps();
         });
     }

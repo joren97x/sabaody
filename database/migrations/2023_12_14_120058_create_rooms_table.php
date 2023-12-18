@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('room_number');
             $table->string('price');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

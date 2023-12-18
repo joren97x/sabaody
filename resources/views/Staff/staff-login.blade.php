@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="images/logo.png">
+  <link rel="shortcut icon" href="{{asset('images/logo.png')}}">
   <link rel="stylesheet" href="{{asset('admin/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin/css/custom.css')}}">
   <title>Sabaody Resort</title>
@@ -39,9 +39,14 @@
                     @enderror
                     <a href="staff_fpass.php" style="color: blue; font-size: 0.8em; text-decoration: none;">Fogot Password?</a>
                   </div>
+                  @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{session('error')}}
+                      </div>
+                    @endif
                 </div>
                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <input type="text" value="staff" name="role">
+                    <input type="hidden" value="staff" name="role">
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
                 </div>
                 <div>

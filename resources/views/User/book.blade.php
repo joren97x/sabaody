@@ -48,8 +48,8 @@
                                         <div class="col-6">
                                         <div class="form-outline flex-fill mb-0">
                                             <label>Check-in</label>
-                                            <input type="date" name="check-in" id="" class="form-control" >
-                                            @error('check-in')
+                                            <input type="date" name="check_in" id="" class="form_control" >
+                                            @error('check_in')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -57,12 +57,18 @@
                                         <div class="col-6">
                                         <div class="form-outline flex-fill mb-0">
                                             <label>Check-out</label>
-                                            <input type="date" name="check-out" id="" class="form-control" >
-                                            @error('check-out')
+                                            <input type="date" name="check_out" id="" class="form-control" >
+                                            @error('check_out')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                         </div>
                                         </div>
+                                        @if(session()->has('errorCheckin'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{session('errorCheckin')}}
+                                          </div>
+                                        @endif
+
                                       </div>
                                     </div>
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -84,7 +90,16 @@
 
 
 
-	<script defer src="js/bootstrap.bundle.min.js"></script>
+	<script defer src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+    <script>
+        // Check for error message in the page's JavaScript section
+        var errorMessage = @json(session('error'));
+        if (errorMessage) {
+            alert(errorMessage);
+            alert("errorr");
+            // You can customize how you want to display the error message
+        }
 
+    </script>
 </body>
 </html>

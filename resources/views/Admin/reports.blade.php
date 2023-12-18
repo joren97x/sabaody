@@ -16,7 +16,7 @@
             <h3 class="text-center">
               <a href="/admin/dashboard">Dashboard</a>
             </h3>
-            <h6 class="text-center small"><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
+            <h6 class="text-center small"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
             <hr>
             <ul class="list-unstyled ps-0">
                 <li class="mb-1">
@@ -37,7 +37,7 @@
                     <div class="collapse" id="staff-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li><a href="/admin/add-employees"><i class="fa-solid fa-user-plus"></i> add employee</a></li>
-                            <li><a href="/admin/view-employees"><i class="fa-solid fa-users-viewfinder"></i> view employee</a></li>
+                            <li><a href="/admin/view-employee"><i class="fa-solid fa-users-viewfinder"></i> view employee</a></li>
                         </ul>
                     </div>
                 </li>
@@ -58,19 +58,44 @@
         <!-- content -->
 <div class="content text-center p-5">
     <div class="row">
+        @foreach ($reports as $report)
         <div class="col-3">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title pt-1">Room Number</h3>
-                    <p class="card-title pt-1 text-start">Item: </p>
-                    <p class="card-title pt-1 text-start">Issues: description   </p>
+                    <h3 class="card-title pt-1"> {{$report->room_number}} </h3>
+                    <p class="card-title pt-1 text-start">Item: {{$report->item}} </p>
+                    <p class="card-title pt-1 text-start">Issues: {{$report->description}} </p>
+                    <p class="card-title pt-1 text-start">Status: {{$report->status}} </p>
                 </div>
                 <div class="card-bottom">
-                    <span><i class="fa-solid fa-hammer h4 text-primary"></i></span>
-                    <span><i class="fa-solid fa-square-xmark h4 text-danger"></i></span>
+                    
+                    <form action="/staff/fix-report/{{$report->id}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button class="btn" type="submit"><i class="bi bi-hammer text-primary"></i></button>
+                    </form>
+                    <form action="/staff/delete-report/{{$report->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn"><i class="bi bi-x-circle-fill text-danger"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
+        @endforeach
+        @if(count($reports) == 0) 
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title pt-1"> No reports found. </h3>
+                </div>
+                <div class="card-bottom">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        @endif
         <!-- add more -->
     </div>
 </div>

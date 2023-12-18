@@ -4,21 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\User;
+use App\Models\Report;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     //
     public function dashboard() {
-        return view('admin.dashboard');
+        $pending = Booking::where('status', 'pending')->count();
+        $reserved = Booking::where('status', 'reserved')->count();
+        $checked_out = Booking::where('status', 'checked_out')->count();
+        $report = Report::all()->count();
+        return view('admin.dashboard', ['pending' => $pending, 'reserved' => $reserved, 'checked_out' => $checked_out, 'report' => $report]);
     }
 
     public function view_rooms() {
         return view('admin.view-rooms', ['rooms' => Room::all()]);
     }
 
-    public function view_employees() {
-        return view('admin.view-employees', ['employees' => User::all()]);
+    public function view_employee(User $employee) {
+        return view('admin.view-employees', ['employee' => $employee]);
     }
 
     public function add_rooms() {
@@ -26,18 +32,20 @@ class AdminController extends Controller
     }
 
     public function add_employees() {
-        return view('admin.add-employees');
+        return view('admin.add-employees', ['employees' => User::all()]);
     }
 
     public function successful() {
-        return view('admin.successful');
+        $reservations = Booking::where('status', 'successful')->get();
+        return view('admin.successful', ['reservations' => $reservations]);
     }
 
     public function declined() {
-        return view('admin.declined');
+        $reservations = Booking::where('status', 'declined')->get();
+        return view('admin.declined', ['reservations' => $reservations]);
     }
 
     public function reports() {
-        return view('admin.reports');
+        return view('admin.reports', ['reports' => Report::all()]);
     }
 }

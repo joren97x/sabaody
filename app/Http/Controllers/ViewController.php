@@ -45,7 +45,7 @@ class ViewController extends Controller
     }
     
     public function login_as_staff() {
-        return view('admin.staff-login');
+        return view('staff.staff-login');
     }
 
     public function authenticate(Request $request) {
@@ -56,13 +56,15 @@ class ViewController extends Controller
         ]);
 
         if(Auth::attempt($data)) {
-            
-            return redirect('/admin/dashboard');
+            if(auth()->user()->role == 'admin' && $request->role == 'admin') {
+                return redirect('/admin/dashboard');
+            }
+            if(auth()->user()->role == 'staff' && $request->role == 'staff') {
+                return redirect('/staff/dashboard');
+            }
         }
-        else {
-            
-            return back();
-        }
+
+        return back()->with(['error' => 'Invalid credentials']);
 
     }
 

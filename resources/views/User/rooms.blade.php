@@ -46,7 +46,7 @@
       @foreach($rooms as $room)
         <div class="col-4 col-md-12 col-sm-12 col-lg-4 mt-3">
             <div class="card room-card">
-              <img src="{{asset('images/'.$room->image)}}" class="card-img-top">
+              <img src="{{asset('images/rooms/'.$room->image)}}" style="height: 300px" alt="room image" class="card-img-top">
               <div class="card-body">
                 <h5 class="card-title">{{ $room->name }}</h5>
                 <p class="card-text">{{ $room->description }}</p>
