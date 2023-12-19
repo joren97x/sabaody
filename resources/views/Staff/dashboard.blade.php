@@ -70,25 +70,25 @@
                     <div class="top text-center p-3 h4">
                         Pending
                     </div>
-                        <p class="text-center h2 d-block">30</p>
+                        <p class="text-center h2 d-block"> {{$pending}} </p>
                 </div>
                 <div class="carousel-item">
                     <div class="top text-center p-3 h4">
                         Reserved
                     </div>
-                        <p class="text-center h2 d-block">30</p>
+                        <p class="text-center h2 d-block"> {{$reserved}} </p>
                 </div>
                 <div class="carousel-item">
                     <div class="top text-center p-3 h4">
                         Check Out
                     </div>
-                        <p class="text-center h2 d-block">30</p>
+                        <p class="text-center h2 d-block"> {{$checked_out}} </p>
                 </div>
                 <div class="carousel-item">
                     <div class="top text-center p-3 h4">
                         Report
                     </div>
-                        <p class="text-center h2 d-block">30</p>
+                        <p class="text-center h2 d-block"> {{ $report }} </p>
                 </div>
             </div> 
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -106,7 +106,8 @@
             <div class="d-flex justify-content-between">
                 <div class="d-flex flex-row">
                     <div class="align-self-center">
-                        <h2 class="h1 mb-0 me-4">&#8369; 36,000.00</h2>
+                        <h2 class="h1 mb-0 me-4">{{ '₱' . number_format($monthly_sales, 2) }}
+                        </h2>
                     </div>
                     <div>
                         <h4>Total Sales</h4>

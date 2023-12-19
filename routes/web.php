@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StaffController;
 
@@ -34,6 +35,7 @@ Route::post('/login', [ViewController::class, 'authenticate']);
 Route::post('/book', [BookController::class, 'store']);
 
 Route::get('/logout', [ViewController::class, 'logout']);
+Route::post('/review', [ReviewController::class, 'store']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 Route::get('/admin/view-rooms', [AdminController::class, 'view_rooms']);
@@ -56,6 +58,8 @@ Route::get('/staff/successful', [StaffController::class, 'successful']);
 Route::get('/staff/declined', [StaffController::class, 'declined']);
 Route::get('/staff/reports', [StaffController::class, 'reports']);
 Route::put('/staff/approve-reservation', [BookingController::class, 'approve']);
+Route::put('/staff/check-out-reservation', [BookingController::class, 'check_out']);
+Route::put('/staff/check-in-reservation', [BookingController::class, 'check_in']);
 Route::put('/staff/decline-reservation', [BookingController::class, 'decline']);
 Route::put('/staff/fix-report/{report}', [ReportController::class, 'fix']);
 Route::delete('/staff/delete-report/{report}', [ReportController::class, 'destroy']);

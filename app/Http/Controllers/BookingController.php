@@ -22,4 +22,18 @@ class BookingController extends Controller
         return redirect('/staff/declined');
     }
 
+    public function check_out(Request $request) {
+        $reservation = Booking::find($request->reservation);
+        $reservation->status = 'successful';
+        $reservation->update();
+        return redirect('/staff/successful');
+    }
+
+    public function check_in(Request $request) {
+        $reservation = Booking::find($request->reservation);
+        $reservation->status = 'checked_in';
+        $reservation->update();
+        return redirect('/staff/check-out');
+    }
+
 }

@@ -114,7 +114,7 @@
             <div class="d-flex justify-content-between">
                 <div class="d-flex flex-row">
                     <div class="align-self-center">
-                        <h2 class="h1 mb-0 me-4">&#8369; 36,000.00</h2>
+                        <h2 class="h1 mb-0 me-4">{{ '₱' . number_format($monthly_sales, 2) }}</h2>
                     </div>
                     <div>
                         <h4>Total Sales</h4>

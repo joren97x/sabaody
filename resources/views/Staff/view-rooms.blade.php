@@ -47,8 +47,24 @@
     </ul>
 </div>
         <!-- content -->
-<div class="content text-center p-5">
-	<h1>View Room!</h1>
+<div class="content row text-center p-5">
+        @foreach($rooms as $room)
+          <div class="col-4 col-md-12 col-sm-12 col-lg-4 mt-3">
+              <div class="card room-card">
+                <img src="{{asset('images/rooms/'.$room->image)}}" style="height: 300px" alt="room image" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">{{ $room->name }}</h5>
+                  <p class="card-text">{{ $room->description }}</p>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Max Occupancy: {{$room->occupancy}} Adult</li>
+                    <li class="list-group-item">Bed Type: {{ $room->bed_type }}</li>
+                    <li class="list-group-item">Price: &#8369;{{$room->price}} </li>
+                    <li class="list-group-item">Status: {{$room->status ? "Available" : "Not available"}} </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            @endforeach
 </div>
 
 </body>

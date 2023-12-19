@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
-    <script defer src="js/bootstrap.bundle.min.js"></script>
+    <script defer src="{{asset('admin/js/bootstrap.bundle.min.js')}}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
   <title>Sabaody Resort</title>
 </head>
 <body>
@@ -54,41 +55,76 @@
                   <li class="list-group-item">Max Occupancy: {{$room->occupancy}} Adult</li>
                   <li class="list-group-item">Bed Type: {{ $room->bed_type }}</li>
                   <li class="list-group-item">Price: &#8369;{{$room->price}} </li>
-                  <li class="list-group-item">Rate: <i class="fa-regular fa-thumbs-up text-primary"></i> <i class="fa-regular fa-thumbs-down text-primary"></i></li>
+                  <li class="list-group-item">Rate: <button class="btn " data-bs-toggle="modal" data-bs-target="#ratemodal"><i class="bi bi-hand-thumbs-up-fill text-primary"></i></button> <button class="btn" data-bs-toggle="modal" data-bs-target="#ratemodal"><i class="bi bi-hand-thumbs-down-fill text-primary"></i></button> </li>
                 </ul>
-                <a href="/book/{{$room->id}}" class="btn btn-primary mt-3" style="width: 100%;">Book Now</a>
+                <a href="/book/{{$room->id}}" >
+                <button {{$room->status == 0 ? 'disabled' : ''}} class="btn btn-primary mt-3">
+                Book Now
+                </button>
+                @foreach ($room->reviews as $review)
+                    <div class="card" style="width: 100%;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ $review->name }}</h5>
+                    <p class="card-text"> {{ $review->review }} </p>
+                  </div>
+                </div>
+                @endforeach
+              </a>
               </div>
             </div>
           </div>
           @endforeach
-      <div class="col-7 col-md-12 col-sm-12 col-lg-7 mt-3 p-5">
-      <div class="card">
-      <div class="card-header border-0 bg-transparent">
-      <i class="fa-solid fa-circle-user h1"></i> 
-        <span class="ms-3">Jay-l</span>
-      </div>
-      <div class="card-body py-1">
-        <form>
-          <div>
-            <label for="exampleFormControlTextarea1" class="visually-hidden">
-              Comment</label
-            >
-            <textarea class="form-control form-control-sm border border-2 rounded-1" id="exampleFormControlTextarea1" style="height: 50px" placeholder="Add a comment..." minlength="3" maxlength="255"></textarea>
-          </div>
-        </form>
-      </div>
-      <footer class="card-footer bg-transparent border-0 text-end">
-        <button type="submit" class="btn btn-primary btn-sm">
-          Submit
-        </button>
-      </footer>
-    </div>    
-    </div>
+      
           <!-- Add more room cards -->
 </div>
   </div>
 
-
+  <div class="modal fade" id="ratemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form action="/review" method="POST">
+        @csrf
+      <div class="modal-content">
+        
+          <div class="modal-body">
+            <div class="card-header border-0 bg-transparent">
+              <i class="bi bi-person-circle h2"></i>
+            </div>
+            <div class="card-body py-1">
+              
+                <div>
+              <input type="text" class="form-control" name="name" placeholder="Your name..">
+              <input type="hidden" name="status"  value="1">
+                  @error('name')
+              <p class="text-danger"> {{$message}} </p>
+                  @enderror
+              <input type="text" name="code" placeholder="Code number" class="form-control my-2">
+              @error('code')
+              <p class="text-danger"> {{$message}} </p>
+                  @enderror
+                  <label for="exampleFormControlTextarea1" class="visually-hidden">
+                    Comment</label
+                  >
+                  <textarea class="form-control form-control-sm border border-2 rounded-1" name="review" id="exampleFormControlTextarea1" style="height: 50px" placeholder="Add a comment..." minlength="3" maxlength="255"></textarea>
+                  @error('review')
+                  <p class="text-danger"> {{$message}} </p>
+                      @enderror
+                </div>
+            </div>
+            <footer class="card-footer bg-transparent border-0 text-end">
+              
+            </footer>
+        </div>
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-sm">
+            Submit
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
 <nav>
   <ul class="pagination justify-content-center">
     <li class="page-item">

@@ -14,7 +14,7 @@
         <!-- sidebar -->
 <div class="sidebar">
     <h3 class="text-center">
-      <a href="staff_dashboard.php">Dashboard</a>
+      <a href="/staff/dashboard">Dashboard</a>
     </h3>
     <h6 class="text-center small"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
     <hr>
@@ -76,6 +76,11 @@
                     </th>
                 </tr>
             @endforeach
+            @if (count($reservations) == 0)
+                <tr>
+                    <td colspan="7">No data found.</td>
+                </tr>
+            @endif
         </tbody>
     </table>
 </div>

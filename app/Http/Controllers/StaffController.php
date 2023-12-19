@@ -15,14 +15,18 @@ class StaffController extends Controller
         $reserved = Booking::where('status', 'reserved')->count();
         $checked_out = Booking::where('status', 'checked_out')->count();
         $report = Report::all()->count();
-        return view('staff.dashboard', ['pending' => $pending, 'reserved' => $reserved, 'checked_out' => $checked_out, 'report' => $report]);
+
+        $bookings = Booking::where('status', 'checked_in')->orWhere('status', 'successful')->get();
+        $monthly_sales = 0;
+        foreach($bookings as $b) {
+            $r = Room::where('room_number', $b->room_number)->first();
+            $monthly_sales += $r->price;
+        }
+        return view('staff.dashboard', ['monthly_sales' => $monthly_sales ,'pending' => $pending, 'reserved' => $reserved, 'checked_out' => $checked_out, 'report' => $report]);
     }
 
     public function pending() {
         $reservations = Booking::where('status', 'pending')->get();
-        // foreach($reservations as $r) {
-        //     $r->room = Room::where('room_number', $r->room_number)->first();
-        // }
         return view('staff.pending', ['reservations' => $reservations]);
     }
 
@@ -32,15 +36,17 @@ class StaffController extends Controller
     }
 
     public function check_out() {
-        return view('staff.check-out');
+        $reservations = Booking::where('status', 'checked_in')->get();
+        return view('staff.check-out', ['reservations' => $reservations]);
     }
 
     public function view_room() {
-        return view('staff.view-rooms');
+        return view('staff.view-rooms', ['rooms' => Room::all()]);
     }
 
     public function successful() {
-        return view('staff.successful');
+        $reservations = Booking::where('status', 'successful')->get();
+        return view('staff.successful', ['reservations' => $reservations]);
     }
 
     public function declined() {

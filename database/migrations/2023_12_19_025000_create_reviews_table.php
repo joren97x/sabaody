@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('room_number');
+            $table->foreignId('room_number');
             $table->string('name');
-            $table->string('status');
-            $table->string('email');
-            $table->string('code');
-            $table->date('check_in');
-            $table->date('check_out');
+            $table->string('review');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('reviews');
     }
 };

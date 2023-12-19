@@ -38,35 +38,40 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h1 class="text-center mb-5 p-5">Report Form</h1>
+                @if(session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                  {{ session('success') }}
+                </div>
+                @endif
                 <form action="/report" method="POST">
                   @csrf
                     <div class="mb-3">
                         <label for="reporterName" class="form-label">Enter CODE:</label>
-                        <input type="text" name="room_number" class="form-control" id="reporterName" placeholder="Enter code">
-                        @error('room_number')
+                        <input type="text" name="code" class="form-control" id="reporterName" value="{{old('code')}}" placeholder="Enter code">
+                        @error('code')
                             <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="lowSeverity" value="Bed">
+                            <input name="item" class="form-check-input" type="radio"  name="severityRadio" id="lowSeverity" value="Bed">
                             <label class="form-check-label" for="lowSeverity">BED</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="Cabinet">
+                            <input name="item" class="form-check-input" type="radio"  name="severityRadio" id="highSeverity" value="Cabinet">
                             <label class="form-check-label" for="highSeverity">CABINET</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="mediumSeverity" value="TV">
+                            <input name="item" class="form-check-input" type="radio"  name="severityRadio" id="mediumSeverity" value="TV">
                             <label class="form-check-label" for="mediumSeverity">TV</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="Cr">
+                            <input name="item" class="form-check-input" type="radio"  name="severityRadio" id="highSeverity" value="Cr">
                             <label class="form-check-label" for="highSeverity">CR</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="item" class="form-check-input" type="radio" name="severityRadio" id="highSeverity" value="Ref">
+                            <input name="item" class="form-check-input" type="radio"  name="severityRadio" id="highSeverity" value="Ref">
                             <label class="form-check-label" for="highSeverity">REF</label>
                         </div>
                         @error('item')
@@ -75,7 +80,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <textarea  name="description" class="form-control" id="reportDescription" placeholder="Describe the issue" ></textarea>
+                        <textarea  name="description" class="form-control"  id="reportDescription" placeholder="Describe the issue" >{{ old('description')}}</textarea>
                         @error('description')
                             <p class="text-danger">{{$message}}</p>
                         @enderror

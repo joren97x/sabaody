@@ -16,7 +16,14 @@ class AdminController extends Controller
         $reserved = Booking::where('status', 'reserved')->count();
         $checked_out = Booking::where('status', 'checked_out')->count();
         $report = Report::all()->count();
-        return view('admin.dashboard', ['pending' => $pending, 'reserved' => $reserved, 'checked_out' => $checked_out, 'report' => $report]);
+
+        $bookings = Booking::where('status', 'checked_in')->orWhere('status', 'successful')->get();
+        $monthly_sales = 0;
+        foreach($bookings as $b) {
+            $r = Room::where('room_number', $b->room_number)->first();
+            $monthly_sales += $r->price;
+        }
+        return view('admin.dashboard', ['monthly_sales' => $monthly_sales, 'pending' => $pending, 'reserved' => $reserved, 'checked_out' => $checked_out, 'report' => $report]);
     }
 
     public function view_rooms() {

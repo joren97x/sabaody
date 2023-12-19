@@ -15,7 +15,7 @@
         <!-- sidebar -->
 <div class="sidebar">
     <h3 class="text-center">
-      <a href="staff_dashboard.php">Dashboard</a>
+      <a href="/staff/dashboard">Dashboard</a>
     </h3>
     <h6 class="text-center small"><a href="/logout"><i class="fas fa-arrow-right"></i> Sign Out</a></h6>
     <hr>
@@ -51,7 +51,7 @@
 <div class="content text-center p-5">
     <div class="row">
         @foreach ($reservations as $reservation)
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title pt-1">{{ $reservation->room_number }}</h3>
@@ -69,6 +69,13 @@
                 </div>
             </div>
         @endforeach
+        @if (count($reservations) == 0)
+        <div class="col-4">
+          <div class="card">
+                  <h3 class="card-title pt-1">No pending reservations found.</h3>
+          </div>
+      </div>
+        @endif
         <!-- add more -->
     </div>
 </div>

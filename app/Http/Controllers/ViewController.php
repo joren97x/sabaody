@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,9 @@ class ViewController extends Controller
 
     public function rooms($category) {
         $rooms = Room::where('category', $category)->get();
+        foreach($rooms as $r) {
+            $r->reviews = Review::where('room_number', $r->room_number)->get();
+        }
         return view('user.rooms', ['rooms' => $rooms]);
     }
 

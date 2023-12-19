@@ -15,7 +15,7 @@
         <!-- sidebar -->
 <div class="sidebar">
     <h3 class="text-center">
-      <a href="staff_dashboard.php">Dashboard</a>
+      <a href="/staff/dashboard">Dashboard</a>
     </h3>
     <h6 class="text-center small"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
     <hr>
@@ -51,7 +51,7 @@
 <div class="content text-center p-5">
     <div class="row">
         @foreach ($reports as $report)
-        <div class="col-3">
+        <div class="col-4">
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title pt-1"> {{$report->room_number}} </h3>
@@ -75,6 +75,19 @@
             </div>
         </div>
         @endforeach
+        @if(count($reports) == 0) 
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title pt-1"> No reports found. </h3>
+                </div>
+                <div class="card-bottom">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        @endif
         <!-- add more -->
     </div>
 </div>

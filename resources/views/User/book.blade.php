@@ -13,7 +13,52 @@
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
-                <div class="card-form text-black" style="border: none;">
+                
+                @if(session()->has('success'))
+                
+                    <div class="card alert alert-success" style="width: 69%;">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Booked successfully!</h5>
+                          <div class="row">
+                            <div class="col-6">
+                                <h6 class="card-subtitle mb-2 text-body-secondary">code:  <strong>{{ session('success')['code'] }}</strong> </h6>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="card-subtitle mb-2 text-body-secondary">Room number:  <strong>{{ session('success')['room_number'] }}</strong> </h6>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                                <p class="card-text"> Name:  {{ session('success')['name'] }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="card-text"> Email: {{ session('success')['email'] }} </p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                                <p class="card-text"> Check in: {{ session('success')['check_in'] }} </p>
+                            </div>
+                            <div class="col-6">
+                                <p class="card-text"> Check out: {{ session('success')['check_out'] }} </p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                                <p class="card-text"> Booking status: {{ session('success')['status'] }} </p>
+                            </div>
+                            <div class="col-6">
+                                <p class="card-text"> Total: {{$room->price}} </p>
+                            </div>
+                          </div>
+                            <a href="/">
+                                <button class="btn btn-primary mt-2">Go back</button>
+                            </a>
+                        </div>
+                    </div>
+                      
+                  @else
+                  <div class="card-form text-black" style="border: none;">
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
@@ -48,7 +93,7 @@
                                         <div class="col-6">
                                         <div class="form-outline flex-fill mb-0">
                                             <label>Check-in</label>
-                                            <input type="date" name="check_in" id="" class="form_control" >
+                                            <input type="date" name="check_in" id="" class="form-control" >
                                             @error('check_in')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
@@ -82,6 +127,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
+
+                
             </div>
         </div>
     </div>

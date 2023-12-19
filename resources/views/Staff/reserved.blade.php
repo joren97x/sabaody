@@ -14,7 +14,7 @@
         <!-- sidebar -->
 <div class="sidebar">
     <h3 class="text-center">
-      <a href="staff_dashboard.php">Dashboard</a>
+      <a href="/staff/dashboard">Dashboard</a>
     </h3>
     <h6 class="text-center small"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></h6>
     <hr>
@@ -50,7 +50,7 @@
 <div class="content text-center p-5">
     <div class="row">
         @foreach ($reservations as $reservation)
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title pt-1">{{ $reservation->room_number }}</h3>
@@ -62,15 +62,84 @@
                         </ul>
                     </div>
                     <div class="card-bottom">
-                        <button class="btn btn-sm" onclick="setModal({{$reservation}})" data-bs-toggle="modal" data-bs-target="#approveReservation"><i class="bi bi-check-circle-fill text-success"></i></button>
-                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#declineReservation"><i class="bi bi-x-circle-fill text-danger"></i></button>
+                        <button class="btn btn-sm" onclick="setCheckoutModal({{$reservation}})" data-bs-toggle="modal" data-bs-target="#checkoutmodal"><i class="bi bi-check-circle-fill text-success"></i></button>
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#viewticketmodal" ><i class="bi bi-ticket-detailed-fill text-info"></i></button>
                     </div>
                 </div>
             </div>
         @endforeach
+        @if (count($reservations) == 0)
+        <div class="col-4">
+          <div class="card">
+                  <h3 class="card-title pt-1">No reservations found.</h3>
+          </div>
+      </div>
+        @endif
         <!-- add more -->
     </div>
 </div>
-
+<div class="modal fade" id="checkoutmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Proceed to checkout</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title pt-1 text-center" id="modal_roomnumber">  </h3>
+                    <ul class="list-group text-start">
+                        <li class="list-group-item">Name: <span id="modal_name"></span> </li>
+                        <li class="list-group-item">Email: <span id="modal_email"></span> </li>
+                        <li class="list-group-item">Check In: <span id="modal_checkin"></span> </li>
+                        <li class="list-group-item">Check Out: <span id="modal_checkout"></span> </li>
+                    </ul>
+                </div>
+            </div>
+          Proceed to checkout?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="/staff/check-in-reservation" method="POST">
+            @csrf
+            @method('PUT')
+            <input type="hidden" value="" id="modal_reservationid" name="reservation">
+            <button type="submit" class="btn btn-primary">Go</button>
+      </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="viewticketmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">View ticket</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Proceed to checkout?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
+
+    <script>
+        function setCheckoutModal(reservation) {
+        document.getElementById('modal_roomnumber').innerHTML = reservation.room_number
+        document.getElementById('modal_name').innerHTML = reservation.name
+        document.getElementById('modal_email').innerHTML = reservation.email
+        document.getElementById('modal_checkin').innerHTML = reservation.check_in
+        document.getElementById('modal_checkout').innerHTML = reservation.check_out
+        document.getElementById('modal_reservationid').value = reservation.id
+    }
+    </script>
+
 </html>
