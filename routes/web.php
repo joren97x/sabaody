@@ -35,7 +35,7 @@ Route::post('/login', [ViewController::class, 'authenticate']);
 Route::post('/book', [BookController::class, 'store']);
 
 Route::get('/logout', [ViewController::class, 'logout']);
-Route::post('/review', [ReviewController::class, 'store']);
+Route::post('/review/{room}', [ReviewController::class, 'store']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 Route::get('/admin/view-rooms', [AdminController::class, 'view_rooms']);

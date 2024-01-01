@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Review;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class ReviewController extends Controller
 {
     //
-    public function store(Request $request) {
+    public function store(Room $room, Request $request) {
+        $is_booked = Booking::where('room_number', $room->room_number)->where('code', $request->code)->first();
         $data = $request->validate([
             'code' => ['required', Rule::exists('bookings', 'code')],
             'name' => 'required',
@@ -18,7 +20,12 @@ class ReviewController extends Controller
             'status' => 'required'
         ]);
 
-        $room = Booking::where('code', $data['code'])->first();
+        if($is_booked) {
+            $room = Booking::where('code', $data['code'])->first();
+        }
+        else {
+            return back()->withErrors(['error' => 'Error']);
+        }
         $data['room_number'] = $room->room_number;
         Review::create($data);
         return back();

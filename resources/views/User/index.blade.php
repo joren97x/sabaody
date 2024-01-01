@@ -75,7 +75,7 @@
       <div class="card mb-3 border-0">
         <div class="row g-2">
           <div class="col-md-8">
-            <img src="{{asset('images/pool.jpg')}}" class="img-fluid rounded-start" alt="pool">
+            <img src="{{asset('images/pool.jpg')}}" class="w-100" alt="pool">
           </div>
           <div class="col-md-4">
             <div class="card-body">

@@ -55,7 +55,7 @@
                   <li class="list-group-item">Max Occupancy: {{$room->occupancy}} Adult</li>
                   <li class="list-group-item">Bed Type: {{ $room->bed_type }}</li>
                   <li class="list-group-item">Price: &#8369;{{$room->price}} </li>
-                  <li class="list-group-item">Rate: <button class="btn " data-bs-toggle="modal" data-bs-target="#ratemodal"><i class="bi bi-hand-thumbs-up-fill text-primary"></i></button> <button class="btn" data-bs-toggle="modal" data-bs-target="#ratemodal"><i class="bi bi-hand-thumbs-down-fill text-primary"></i></button> </li>
+                  <li class="list-group-item">Rate: <button class="btn" onclick="changeStatus(1)" data-bs-toggle="modal" data-bs-target="#ratemodal{{$room->id}}"><i class="bi bi-hand-thumbs-up-fill text-primary"></i></button> <button class="btn" onclick="changeStatus(0)" data-bs-toggle="modal" data-bs-target="#ratemodal{{$room->id}}"><i class="bi bi-hand-thumbs-down-fill text-primary"></i></button> </li>
                 </ul>
                 <a href="/book/{{$room->id}}" >
                 <button {{$room->status == 0 ? 'disabled' : ''}} class="btn btn-primary mt-3">
@@ -64,12 +64,65 @@
                 @foreach ($room->reviews as $review)
                     <div class="card" style="width: 100%;">
                   <div class="card-body">
-                    <h5 class="card-title">{{ $review->name }}</h5>
+                    <h5 class="card-title">{{ $review->name }}</h5> 
+                    @if ($review->status)
+                    <i class="bi bi-hand-thumbs-up-fill text-primary"></i> liked this place.
+                    @else
+                    <i class="bi bi-hand-thumbs-down-fill text-primary"></i> disliked this place.
+                    @endif
                     <p class="card-text"> {{ $review->review }} </p>
                   </div>
                 </div>
                 @endforeach
               </a>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="ratemodal{{$room->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <form action="/review/{{$room->id}}" method="POST">
+                @csrf
+              <div class="modal-content">
+                
+                  <div class="modal-body">
+              <img src="{{asset('images/rooms/'.$room->image)}}" style="height: 300px" alt="room image" class="card-img-top">
+
+                    <div class="card-header h5 border-0 bg-transparent m-2">
+                        {{$room->name}}
+                    </div>
+                    <div class="card-body py-1">
+                      
+                        <div>
+                      <input type="text" class="form-control" name="name" placeholder="Your name..">
+                      <input type="hidden" name="status" id="status">
+                          @error('name')
+                      <p class="text-danger"> {{$message}} </p>
+                          @enderror
+                      <input type="text" name="code" placeholder="Code number" class="form-control my-2">
+                      @error('code')
+                      <p class="text-danger"> {{$message}} </p>
+                          @enderror
+                          <label for="exampleFormControlTextarea1" class="visually-hidden">
+                            Comment</label
+                          >
+                          <textarea class="form-control form-control-sm border border-2 rounded-1" name="review" id="exampleFormControlTextarea1" style="height: 50px" placeholder="Add a comment..." minlength="3" maxlength="255"></textarea>
+                          @error('review')
+                          <p class="text-danger"> {{$message}} </p>
+                              @enderror
+                        </div>
+                    </div>
+                    <footer class="card-footer bg-transparent border-0 text-end">
+                      
+                    </footer>
+                </div>
+              
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary btn-sm">
+                    Submit
+                  </button>
+                </div>
+              </form>
               </div>
             </div>
           </div>
@@ -79,52 +132,7 @@
 </div>
   </div>
 
-  <div class="modal fade" id="ratemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <form action="/review" method="POST">
-        @csrf
-      <div class="modal-content">
-        
-          <div class="modal-body">
-            <div class="card-header border-0 bg-transparent">
-              <i class="bi bi-person-circle h2"></i>
-            </div>
-            <div class="card-body py-1">
-              
-                <div>
-              <input type="text" class="form-control" name="name" placeholder="Your name..">
-              <input type="hidden" name="status"  value="1">
-                  @error('name')
-              <p class="text-danger"> {{$message}} </p>
-                  @enderror
-              <input type="text" name="code" placeholder="Code number" class="form-control my-2">
-              @error('code')
-              <p class="text-danger"> {{$message}} </p>
-                  @enderror
-                  <label for="exampleFormControlTextarea1" class="visually-hidden">
-                    Comment</label
-                  >
-                  <textarea class="form-control form-control-sm border border-2 rounded-1" name="review" id="exampleFormControlTextarea1" style="height: 50px" placeholder="Add a comment..." minlength="3" maxlength="255"></textarea>
-                  @error('review')
-                  <p class="text-danger"> {{$message}} </p>
-                      @enderror
-                </div>
-            </div>
-            <footer class="card-footer bg-transparent border-0 text-end">
-              
-            </footer>
-        </div>
-      
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary btn-sm">
-            Submit
-          </button>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
+  
 <nav>
   <ul class="pagination justify-content-center">
     <li class="page-item">
@@ -142,5 +150,13 @@
     </li>
   </ul>
 </nav>
+
+  <script>
+    function changeStatus(status) {
+      document.getElementById('status').value = status
+    }
+  </script>
+
 </body>
 </html>
+
