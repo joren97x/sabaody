@@ -27,7 +27,15 @@ class ReviewController extends Controller
             return back()->withErrors(['error' => 'Error']);
         }
         $data['room_number'] = $room->room_number;
-        Review::create($data);
+        if($is_booked->code_used == false) {
+            // dd("go");
+            Review::create($data);
+            $is_booked->code_used = true;
+            $is_booked->update();
+        }
+        else {
+            return back()->withErrors(['error' => 'Error']);
+        }
         return back();
 
     }

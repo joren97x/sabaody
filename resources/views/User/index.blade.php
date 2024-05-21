@@ -9,6 +9,25 @@
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <script defer src="js/bootstrap.bundle.min.js"></script>
   <title>Sabaody Resort</title>
+  <style>
+    .description-box {
+      background-color: #f0f0f0;
+      padding: 10px;
+      position: fixed;
+      bottom: 1px; /* Adjust this value to change vertical position */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Center horizontally */
+      width: 300px; /* Set width as needed */
+      z-index: 1000; /* Ensure the box stays on top */
+      width: 100%;
+    }
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg fixed-top">
@@ -280,6 +299,38 @@
       <p class="name text-muted text-center"> &copy; Sabaody Resort • All Rights Reserved 2023</p>
   </div>
 </footer>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="description-box">
+        <button type="button" class="btn-close close-btn" aria-label="Close"></button>
+        <h3>Want to Update?</h3>
+        <p>If you click <a id="cookies-link" style="color: blue;">Update</a>, you can access to our new features and functionalities of the system.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get the "Cookies" link element by its ID
+  const cookiesLink = document.getElementById('cookies-link');
+
+  // Add a click event listener to the "Cookies" link
+  cookiesLink.addEventListener('click', function(event) {
+    // Prevent the default action of the link (i.e., navigating to a new URL)
+    event.preventDefault();
+
+    // Redirect to the desired file when the "Cookies" link is clicked
+    window.location.href = '../../new/intro.php';
+  });
+
+  document.querySelectorAll('.close-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      this.closest('.description-box').remove();
+    });
+  });
+</script>
 
 </body>
 </html> 

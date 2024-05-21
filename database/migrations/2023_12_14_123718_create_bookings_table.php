@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('email');
             $table->string('code');
+            $table->boolean('code_used')->default(false);
             $table->date('check_in');
             $table->date('check_out');
             $table->timestamps();

@@ -53,7 +53,7 @@ Route::get('/staff/dashboard', [StaffController::class, 'dashboard']);
 Route::get('/staff/pending', [StaffController::class, 'pending']);
 Route::get('/staff/reserved', [StaffController::class, 'reserved']);
 Route::get('/staff/check-out', [StaffController::class, 'check_out']);
-Route::get('/staff/view-room', [StaffController::class, 'view_room']);
+Route::get('/staff/view-room/{category}', [StaffController::class, 'view_room']);
 Route::get('/staff/successful', [StaffController::class, 'successful']);
 Route::get('/staff/declined', [StaffController::class, 'declined']);
 Route::get('/staff/reports', [StaffController::class, 'reports']);

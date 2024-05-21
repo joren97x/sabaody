@@ -17,6 +17,8 @@ class ViewController extends Controller
     public function rooms($category) {
         $rooms = Room::where('category', $category)->get();
         foreach($rooms as $r) {
+            $r->likes = Review::where('room_number', $r->room_number)->where('status', 1)->count();
+            $r->dislikes = Review::where('room_number', $r->room_number)->where('status', 0)->count();
             $r->reviews = Review::where('room_number', $r->room_number)->get();
         }
         return view('user.rooms', ['rooms' => $rooms]);

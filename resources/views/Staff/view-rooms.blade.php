@@ -28,7 +28,7 @@
                     <li><a href="/staff/pending"><i class="fa-solid fa-book"></i> pending</a></li>
                     <li><a href="/staff/reserved"><i class="fa-solid fa-book-bookmark"></i> reserved</a></li>
                     <li><a href="/staff/check-out"><i class="fa-solid fa-book-open"></i> check out</a></li>
-                    <li><a href="/staff/view-room"><i class="fa-solid fa-house-circle-check"></i> view room</a></li>
+                    <li><a href="/staff/view-room/all-rooms"><i class="fa-solid fa-house-circle-check"></i> view room</a></li>
                 </ul>
             </div>
         </li>
@@ -46,8 +46,28 @@
         </li>
     </ul>
 </div>
+
         <!-- content -->
 <div class="content row text-center p-5">
+  
+<nav>
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link text-dark" href="/rooms/single-room" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link {{request()->is('rooms/single-room') ? 'text-primary': 'text-dark'}} " href="/staff/view-room/all-rooms">All Room</a></li>
+    <li class="page-item"><a class="page-link {{request()->is('rooms/single-room') ? 'text-primary': 'text-dark'}} " href="/staff/view-room/single-room">Single Room</a></li>
+    <li class="page-item"><a class="page-link {{request()->is('rooms/double-room') ? 'text-primary': 'text-dark'}}" href="/staff/view-room/double-room">Double Room</a></li>
+    <li class="page-item"><a class="page-link {{request()->is('rooms/family-room') ? 'text-primary': 'text-dark'}}" href="/staff/view-room/family-room">Family Room</a></li>
+    <li class="page-item">
+      <a class="page-link text-dark" href="/rooms/family-room" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
         @foreach($rooms as $room)
           <div class="col-4 col-md-12 col-sm-12 col-lg-4 mt-3">
               <div class="card room-card">

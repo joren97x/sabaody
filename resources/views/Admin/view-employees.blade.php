@@ -58,9 +58,30 @@
 
 <div class="container content">
     <h1>VIEW EMPLOYEE!</h1>
+    <table class="table table-bordered text-center border-dark">
+        <thead>
+        <tr style="background-color: #F2F4F4;">
+            <th>ID</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Birthday</th>
+            <th>Role</th>
+        </tr>
     @if($employee)
-        {{$employee}}
-    @endif
+        
+        <tr>
+          <td>{{ $employee->id }}</td>
+          <td>{{ $employee->username }}</td>
+          <td>{{ $employee->name }}</td>
+          <td>{{ $employee->email }}</td>
+          <td>{{ $employee->birthday }}</td>
+          <td>{{ $employee->role }}</td>
+        </tr>
+        @endif
+                  
+        </thead>
+    </table>
 </div>
 
 </body>

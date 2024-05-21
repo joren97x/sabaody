@@ -29,7 +29,7 @@
                     <li><a href="/staff/pending"><i class="fa-solid fa-book"></i> pending</a></li>
                     <li><a href="/staff/reserved"><i class="fa-solid fa-book-bookmark"></i> reserved</a></li>
                     <li><a href="/staff/check-out"><i class="fa-solid fa-book-open"></i> check out</a></li>
-                    <li><a href="/staff/view-room"><i class="fa-solid fa-house-circle-check"></i> view room</a></li>
+                    <li><a href="/staff/view-room/all-rooms"><i class="fa-solid fa-house-circle-check"></i> view room</a></li>
                 </ul>
             </div>
         </li>

@@ -40,8 +40,13 @@ class StaffController extends Controller
         return view('staff.check-out', ['reservations' => $reservations]);
     }
 
-    public function view_room() {
-        return view('staff.view-rooms', ['rooms' => Room::all()]);
+    public function view_room($category) {
+        if($category == 'all-rooms') {
+            return view('staff.view-rooms', ['rooms' => Room::all()]);
+        }
+        else {
+            return view('staff.view-rooms', ['rooms' =>  Room::where('category', $category)->get()]);
+        }
     }
 
     public function successful() {
