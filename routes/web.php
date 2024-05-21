@@ -23,7 +23,10 @@ use App\Http\Controllers\StaffController;
 */
 
 Route::get('/', [ViewController::class, 'index']);
-Route::get('/rooms/{category}', [ViewController::class, 'rooms']);
+// Route::get('/rooms/{category}', [ViewController::class, 'rooms']);
+Route::get('/rooms/{category}', function() {
+  return view('user.rooms');
+});
 Route::get('/report', [ViewController::class, 'report']);
 Route::post('/report', [ReportController::class, 'store']);
 Route::get('/team', [ViewController::class, 'team']);
